@@ -1,0 +1,10 @@
+#!/bin/bash
+
+counter=1
+while [ $counter -le 100 ]
+do
+aws stepfunctions start-execution --endpoint-url http://localhost:4585 --state-machine-arn arn:aws:states:us-east-1:000000000000:stateMachine:test_state_machine
+aws lambda invoke --endpoint-url http://localhost:4574 --function-name test test.txt
+((counter++))
+done
+echo finished
